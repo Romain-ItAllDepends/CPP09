@@ -1,4 +1,4 @@
-NAME=bitcoin
+NAME=btc
 
 MY_SOURCES= main.cpp \
 			BitcoinExchange.cpp
@@ -24,7 +24,7 @@ MY_OBJECTS=$(MY_SOURCES:.cpp=.o)
 RM=rm -f
 
 CXX=c++
-CXXFLAGS=-Wall -Werror -Wextra -std=c++98
+CXXFLAGS=-Wall -Werror -Wextra -std=c++98 -g
 
 all: $(NAME)
 
