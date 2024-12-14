@@ -12,37 +12,41 @@
 
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange(void):_dbName("data.csv"), _fileName(NULL) {
+BitcoinExchange::BitcoinExchange(void):_dbName("data.csv"), _fileName(NULL)
+{
 }
 
-BitcoinExchange::BitcoinExchange(BitcoinExchange const &obj):_dbName("data.csv"), _fileName(NULL) {
+BitcoinExchange::BitcoinExchange(BitcoinExchange const &obj)
+{
 	*this = obj;
 }
 
-BitcoinExchange::~BitcoinExchange(void) {
+BitcoinExchange::BitcoinExchange(std::string const &file):_dbName("data.csv"), _fileName(file)
+{
 }
 
-BitcoinExchange	&BitcoinExchange::operator=(BitcoinExchange const &obj) {
-	char* str = new char[std::strlen(obj._fileName) + 1];
-    std::strcpy(str, obj._fileName);
-	char* strDB = new char[std::strlen(obj._dbName) + 1];
-    std::strcpy(strDB, obj._dbName);
+BitcoinExchange::~BitcoinExchange(void)
+{
+}
 
+BitcoinExchange	&BitcoinExchange::operator=(BitcoinExchange const &obj)
+{
 	if (this != &obj) {
-//		_dbName = "data.csv";
-		_fileName = str;
+		_dbName = obj._dbName;
+		_fileName = obj._fileName;
 		// copy map
 	}
 	return (*this);
 }
 
-char *BitcoinExchange::getFileName(void) const {
-	return (_fileName);
+const char *BitcoinExchange::getFileName(void) const
+{
+	return (_fileName.c_str());
 }
 
-
-char *BitcoinExchange::getDBName(void) const {
-	return ((char *)"data.csv"); // Essaye de le link a _dbName
+const char *BitcoinExchange::getDBName(void) const
+{
+	return (_dbName.c_str());
 }
 
 // Si date inexistante

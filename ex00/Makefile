@@ -1,7 +1,8 @@
 NAME=btc
 
 MY_SOURCES= main.cpp \
-			BitcoinExchange.cpp
+			BitcoinExchange.cpp \
+			ErrorMessage.cpp
 
 red='\033[0;31m'
 green='\033[0;32m'
