@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:50:22 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/16 11:47:27 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/16 14:53:55 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,17 +35,15 @@ class BitcoinExchange
 		std::string const				_dbName;
 		std::string const				_fileName;
 		std::map<std::string, float>	_bitcoinRate;
-		std::multimap<std::string, float>	_bitcoinOwn;
 	public:
 		BitcoinExchange();
 		BitcoinExchange(BitcoinExchange const &obj);
 		~BitcoinExchange();
 		BitcoinExchange	&operator=(BitcoinExchange const &obj);
 
-		BitcoinExchange(std::string const &file);
+		BitcoinExchange(std::string const &bdd, std::string const &file);
 
 		void setBitcoinRate();
-		void setBitcoinOwn();
 
 		const char *getFileName() const;
 		const char *getDBName() const;

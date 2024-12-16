@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:51:19 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/16 11:44:10 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/16 14:44:42 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,9 +114,7 @@ static bool FileParser(std::string const &file)
 		std::getline(iss, value, '\n');
 		if (date.empty() || value.empty())
 			return EmptyErrorMessage(ifs);
-		if (DateParser(date, ',', ifs) == false)
-			return false;
-		if (ValueParser(value, ',', ifs) == false)
+		if (DateParser(date, ',', ifs) == false || ValueParser(value, ',', ifs) == false)
 			return false;
 		i++;
 	}
@@ -127,14 +125,14 @@ static bool FileParser(std::string const &file)
 
 int main(int const ac, char *av[])
 {
-	if (ac != 2) {
+	if (ac != 3) {
 		std::cerr << RED << "Error: could not open file." << NC << std::endl;
 		return (1);
 	}
 	std::cout << BLUE << "Data of CSV file parsing: " << NC << std::endl;
-	if (FileParser("data.csv", ',') == false)
+	if (FileParser(av[1]) == false)
 		return (1);
-	BitcoinExchange	btc(av[1]);
+	BitcoinExchange	btc(av[1], av[2]);
 	std::cout << BLUE << "Execution: " << NC << std::endl << std::endl;
 	btc.execute();
 	std::cout << std::endl;

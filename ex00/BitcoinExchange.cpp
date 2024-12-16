@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:50:04 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/16 11:43:43 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/16 14:54:13 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,8 @@ BitcoinExchange::BitcoinExchange(BitcoinExchange const &obj)
 	*this = obj;
 }
 
-BitcoinExchange::BitcoinExchange(std::string const &file):_dbName("data.csv"), _fileName(file)
+BitcoinExchange::BitcoinExchange(std::string const &bdd, std::string const &file):_dbName(bdd), _fileName(file)
 {
-	this->setBitcoinOwn();
 	this->setBitcoinRate();
 }
 
@@ -34,7 +33,7 @@ BitcoinExchange::~BitcoinExchange(void)
 BitcoinExchange	&BitcoinExchange::operator=(BitcoinExchange const &obj)
 {
 	if (this != &obj) {
-		// copy map
+		this->_bitcoinRate = obj._bitcoinRate;
 	}
 	return (*this);
 }
@@ -77,11 +76,11 @@ void BitcoinExchange::setBitcoinRate()
 	ifs.close();
 }
 
-void BitcoinExchange::setBitcoinOwn()
+void BitcoinExchange::execute()
 {
 	int				i = 0;
 	std::string		line, date, value;
-	std::ifstream	ifs;
+	std::ifstream	ifs, tmp;
 
 	ifs.open(_fileName.c_str());
 	if (!ifs.is_open())
@@ -99,29 +98,22 @@ void BitcoinExchange::setBitcoinOwn()
 		std::istringstream iss(line);
 		std::getline(iss, date, '|');
 		std::getline(iss, value, '\n');
+		// std::cout << date << " " << value << std::endl;
 		if (date.empty() || value.empty())
-			return EmptyErrorMessage(ifs);
-		if (DateParser(date, ',', ifs) == false)
-			return false;
-		if (ValueParser(value, ',', ifs) == false)
-			return false;
-		_bitcoinOwn.insert(std::make_pair(date, strtof(value.c_str(), NULL)));
+		{
+			EmptyErrorMessage(tmp);
+			continue ;
+		}
+		if (DateParser(date, '|', tmp) == false || ValueParser(value, '|', tmp) == false)
+			continue ;
+		std::map<std::string, float>::const_iterator itRate = _bitcoinRate.find(date);
+		if (itRate == _bitcoinRate.end())
+			itRate = _bitcoinRate.lower_bound(date);
+		std::cout << GREEN << date << "=> " << value << " = " << strtof(value.c_str(), NULL) * itRate->second;
+		std::cout << NC << std::endl;
 		i++;
 	}
 	ifs.close();
-}
-
-void BitcoinExchange::execute()
-{
-	// Maybe c'est upper ???
-	for (std::multimap<std::string, float>::const_iterator it = _bitcoinOwn.begin(); it != _bitcoinOwn.end(); ++it)
-	{
-		std::map<std::string, float>::const_iterator itRate = _bitcoinRate.find(it->first);
-		if (itRate == _bitcoinRate.end())
-			itRate = _bitcoinRate.lower_bound(it->first);
-		std::cout << it->first << "=> " << it->second << " = " << it->second * itRate->second << std::endl;
-		std::cout << itRate->first << std::endl;
-	}
 }
 
 // Si date inexistante
