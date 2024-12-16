@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:50:22 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/14 09:33:04 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/16 11:47:27 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,18 +15,15 @@
 # include "ErrorMessage.hpp"
 # include <iostream>
 # include <fstream>
-# include <regex.h> // Sa degage normalement
 # include <cstring>
 # include <cstdlib>
 # include <ctime> // mktime
 # include <iomanip>
 # include <sstream>
+# include <limits>
 # include <string>
 # include <map>
 
-// Maybe useless
-# define REGEX_CSV "(^[0-9]{4}[-][0-9]{2}[-][0-9]{2}[,][0-9]{1,})$|(^[0-9]{4}[-][0-9]{2}[-][0-9]{2}[,][0-9]{1,}[.][0-9]{1,2})$"
-# define REGEX_INPUT "(^[0-9]{4}[-][0-9]{2}[-][0-9]{2}[,][0-1][0-9]{3})$"
 # define GREEN "\033[0;32m"
 # define BLUE "\033[0;34m"
 # define RED "\033[0;31m"
@@ -35,20 +32,29 @@
 class BitcoinExchange
 {
 	private:
-		std::string						_dbName;
-		std::string						_fileName;
-		std::map<std::string, float>	bitcoinRate;
-		std::map<std::string, float>	bitcoinOwn;
+		std::string const				_dbName;
+		std::string const				_fileName;
+		std::map<std::string, float>	_bitcoinRate;
+		std::multimap<std::string, float>	_bitcoinOwn;
 	public:
-		BitcoinExchange(void);
+		BitcoinExchange();
 		BitcoinExchange(BitcoinExchange const &obj);
-		~BitcoinExchange(void);
+		~BitcoinExchange();
 		BitcoinExchange	&operator=(BitcoinExchange const &obj);
 
 		BitcoinExchange(std::string const &file);
 
-		const char *getFileName(void) const;
-		const char *getDBName(void) const;
+		void setBitcoinRate();
+		void setBitcoinOwn();
+
+		const char *getFileName() const;
+		const char *getDBName() const;
+
+		void execute();
 };
+
+bool ValueParser(std::string const &value, char const sep, std::ifstream &ifs);
+bool VerifyDigitAfterComma(std::string const &str, unsigned int const start);
+bool DateParser(std::string const &date, char sep, std::ifstream &ifs);
 
 #endif
