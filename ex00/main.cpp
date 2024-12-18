@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:51:19 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/16 14:44:42 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/16 15:05:54 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,6 @@
 #include <string>
 
 #include "BitcoinExchange.hpp"
-
-// parsing .csv et file
-// format -> date -> range
-// "date | valeur"
-// "Année-Mois-Jour" (YYYY-MM-DD)
-
-// Une valeur valide doit être soit un nombre à virgule flottante (float), ou un entier
-// positif, compris entre 0 et 1000 pour input et MAX_INT pour CSV
 
 static std::string SkipSpaces(const std::string& s)
 {
@@ -122,6 +114,8 @@ static bool FileParser(std::string const &file)
 	std::cout << GREEN << "OK" << NC << std::endl << std::endl;
 	return true;
 }
+
+// parse .csv
 
 int main(int const ac, char *av[])
 {

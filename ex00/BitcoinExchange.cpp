@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:50:04 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/16 14:54:13 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/16 15:06:30 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,6 +115,3 @@ void BitcoinExchange::execute()
 	}
 	ifs.close();
 }
-
-// Si date inexistante
-// Soyez attentifs à utilser la date précédente la plus proche
