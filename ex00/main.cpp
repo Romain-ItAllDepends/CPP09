@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:51:19 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/16 15:05:54 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/21 08:59:31 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,15 @@ static bool FileParser(std::string const &file)
 	return true;
 }
 
-// parse .csv
+static bool NameParser(std::string const &name)
+{
+	if (name.length() > 4 && name.substr(name.length() - 4) != ".csv")
+	{
+		std::cerr << RED << "Error: bad file extension." << NC << std::endl << std::endl;
+		return false;
+	}
+	return true;
+}
 
 int main(int const ac, char *av[])
 {
@@ -124,7 +132,7 @@ int main(int const ac, char *av[])
 		return (1);
 	}
 	std::cout << BLUE << "Data of CSV file parsing: " << NC << std::endl;
-	if (FileParser(av[1]) == false)
+	if (FileParser(av[1]) == false || NameParser(av[1]) == false)
 		return (1);
 	BitcoinExchange	btc(av[1], av[2]);
 	std::cout << BLUE << "Execution: " << NC << std::endl << std::endl;
