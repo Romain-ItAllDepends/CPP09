@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:05 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/23 10:58:03 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/23 12:28:22 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,6 @@ void RPN::execute(char **av)
 					value /= stack.top();
 				stack.pop();
 				stack.push(value);
-				// std::cout << value << std::endl;
 			}
 			else if (av[i][j] != ' ')
 			{
@@ -74,5 +73,5 @@ void RPN::execute(char **av)
 	}
 	if (stack.size() > 1)
 		throw std::string("Too few sign!");
-	std::cout << stack.top() << std::endl;
+	std::cout << GREEN << stack.top() << NC << std::endl;
 }
