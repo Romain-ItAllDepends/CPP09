@@ -125,6 +125,8 @@ static bool NameParser(std::string const &name)
 	return true;
 }
 
+// Enlever ErrorMessage et replace par throw "Error message";
+
 int main(int const ac, char *av[])
 {
 	if (ac != 3) {

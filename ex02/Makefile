@@ -18,6 +18,7 @@ light_purple='\033[1;35m'
 light_cyan='\033[1;36m'
 white='\033[1;37m'
 green_c='\033[6;32m'
+nc='\033[0m'
 
 MY_OBJECTS=$(MY_SOURCES:.cpp=.o)
 
@@ -33,24 +34,24 @@ all: $(NAME)
 $(NAME) : $(MY_OBJECTS)
 	@clear
 	@$(CXX) $(CXXFLAGS) $^ -o $(NAME)
-	@echo $(light_cyan)"\t   »»-————　Make　————-««\n"
+	@echo $(light_cyan)"\t   »»-————　Make　————-««\n"$(nc)
 
 
-	
-clean: 
+
+clean:
 	@clear
 	@$(RM) $(MY_OBJECTS)
-	@echo $(light_green)"\t  »»-————　Clean　————-««\n"
+	@echo $(light_green)"\t  »»-————　Clean　————-««\n"$(nc)
 
 fclean: clean
 	@$(RM) $(NAME)
-	@echo $(white)"\t»»-————　Full clean　————-««\n"
+	@echo $(white)"\t»»-————　Full clean　————-««\n"$(nc)
 
 re: fclean all
-	@echo $(light_green)"\t  »»-————　Clean　————-««\n"
-	@echo $(white)"\t»»-————　Full clean　————-««\n"
-	@echo $(green_c)"\t   »»-————　Done　————-««"
-	
+	@echo $(light_green)"\t  »»-————　Clean　————-««\n"$(nc)
+	@echo $(white)"\t»»-————　Full clean　————-««\n"$(nc)
+	@echo $(green_c)"\t   »»-————　Done　————-««"$(nc)
+
 noel:
 	@echo "		 __  __					      _          _     _                       "
 	@echo "		|  \/  | ____ _ __ _ __ _   _		     | |        (_)   | |                      "
@@ -81,6 +82,6 @@ noel:
 	@echo $(green)"                   /"$(red)"*"$(green)"    "$(orange_c)"o"$(red)"   _..~~\`'"$(cyan)"*   "$(blue_c)"o"$(green)"\\"
 	@echo $(green)"                   \`-.__"$(red)".~'\`'"$(green)"   "$(orange)"*"$(green)"   ___.-'"
 	@echo $(light_orange)"                         \":-------:\""
-	@echo $(orange)"                           \_____/"
+	@echo $(orange)"                           \_____/"$(nc)
 
 .PHONY: all clean fclean re noel
