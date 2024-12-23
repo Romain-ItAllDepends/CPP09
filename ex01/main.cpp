@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:05 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/23 11:08:01 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/23 11:10:35 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int main(int ac, char *av[])
 	} catch (std::exception &error) // Maybe a bad idea
 	{
 		std::cerr << RED << "Error: " << error.what() << NC << std::endl;
-		return 1;
+		return 2;
 	}
 	return 0;
 }
