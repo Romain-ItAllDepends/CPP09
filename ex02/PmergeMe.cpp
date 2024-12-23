@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/23 12:30:50 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/23 12:33:51 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ PmergeMe &PmergeMe::operator=(PmergeMe const &obj)
 	if (this != &obj)
 	{
 		vector = obj.vector;
-		list = obj.list;
+		deque = obj.deque;
 	}
 	return *this;
 }
@@ -41,7 +41,7 @@ void PmergeMe::fill(char **av)
 	for (int i = 1; av[i]; i++)
 	{
 		vector.push_back(atoi(av[i]));
-		list.push_back(atoi(av[i]));
+		deque.push_back(atoi(av[i]));
 		if (i != 1)
 			std::cout << ", " << av[i];
 		else

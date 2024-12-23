@@ -6,14 +6,14 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/23 12:29:50 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/23 12:33:33 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PMERGE_ME_H
 # define PMERGE_ME_H
 
-# include <list>
+# include <deque>
 # include <vector>
 # include <cstdlib>
 # include <iostream>
@@ -27,7 +27,7 @@ class PmergeMe
 {
 	private:
 		std::vector<int> vector;
-		std::list<int> list;
+		std::deque<int> deque;
 	public:
 		PmergeMe();
 		PmergeMe(PmergeMe const &obj);
