@@ -22,7 +22,7 @@ static void ParseInput(int ac, char **str)
 	while (str && str[j])
 	{
 		input = str[j];
-		for (int i = 0; i < 241; i++)
+		for (int i = 0; i < 255; i++)
 		{
 			if (i != 32 && i != 43 && i != 42 && (i < 47 || i > 57) && !input.find(static_cast<char>(i)))
 				throw std::string("Invalid argument: ") + input;
