@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/23 12:44:05 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/24 13:28:05 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <time.h>
 # include <cstdlib>
 # include <iostream>
+# include <algorithm>
 
 # define GREEN "\033[0;32m"
 # define BLUE "\033[0;34m"
@@ -36,6 +37,7 @@ class PmergeMe
 
 		void fill(char **av);
 		void execute();
+		std::vector<int> sortPerPair(std::vector<int> vectore);
 
 		PmergeMe &operator=(PmergeMe const &obj);
 };
