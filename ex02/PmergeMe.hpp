@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/23 12:33:33 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/23 12:44:05 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 # include <deque>
 # include <vector>
+# include <time.h>
 # include <cstdlib>
 # include <iostream>
 
@@ -34,6 +35,7 @@ class PmergeMe
 		~PmergeMe();
 
 		void fill(char **av);
+		void execute();
 
 		PmergeMe &operator=(PmergeMe const &obj);
 };
