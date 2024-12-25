@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/24 13:39:31 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/25 10:06:06 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,10 @@ std::vector<int> PmergeMe::sortPerPair(std::vector<int> vectore)
 		min.push_back(vectore[i] < vectore[i + 1] ? vectore[i] : vectore[i + 1]);
 		max.push_back(vectore[i] > vectore[i + 1] ? vectore[i] : vectore[i + 1]);
 	}
-	if (vectore.size() == 3)
-	{
-		max.push_back(vectore[0] > vectore[1] ? vectore[0] : vectore[1]);
-		max.push_back(vectore[0] > vectore[1] ? vectore[0] : vectore[1]);
-	}
-	else if (vectore.size() % 2 == 1)
+	if (vectore.size() % 2 == 1)
 		min.push_back(vectore.back());
+	if (max.size() == 1 && min.size() == 2)
+		max.push_back(min[0] > min[1] ? min[0] : min[1]);
 	std::cout << std::endl << "Stack : " << std::endl;
 	for (std::size_t i = 0; i < max.size(); i++)
 		std::cout << GREEN << max[i] << " " << RED << min[i] << std::endl;
