@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/25 10:06:06 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/25 11:33:19 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,20 @@ void PmergeMe::fill(char **av)
 			std::cout << vector.back();
 	}
 	std::cout << NC << std::endl;
+}
+
+int binary_search(std::vector<int> start, int target)
+{
+	for (std::size_t i = 0 ; i != start.size() - 1 ; i++)
+	{
+		if (start[i + start.size() / 2] > target)
+			i = i + start.size() / 2 - 1;
+		else if (start[i + start.size() / 2] < target)
+			i = i + start.size() / 2 + 1;
+		else if (start[i] == target)
+			return i;
+	}
+	return -1;
 }
 
 std::vector<int> PmergeMe::sortPerPair(std::vector<int> vectore)
