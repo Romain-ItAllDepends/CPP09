@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/27 09:37:56 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/27 11:34:53 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,6 @@ int binary_search(std::vector<int> start, int target)
 void PmergeMe::execute()
 {
 	std::cout << GREEN << "Executing..." << NC << std::endl;
-	this->sortPerPair(pairVector);
-	this->sortPerPair(pairDeque);
+	this->sortPerPair(pairVector, maxVector);
+	// this->sortPerPair(pairDeque, maxDeque);
 }
