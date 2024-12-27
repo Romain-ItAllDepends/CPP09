@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/27 11:44:30 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/27 12:22:10 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,8 @@ class PmergeMe
 						vector[i] < vector[i + 1] ? vector[i] : vector[i + 1]));
 					max.push_back(vector[i] > vector[i + 1] ? vector[i] : vector[i + 1]);
 				}
+				if (vector.size() % 2 == 1)
+					pair.push_back(std::make_pair(-1, vector.back()));
 			}
 			else
 			{
@@ -62,21 +64,34 @@ class PmergeMe
 					pair.push_back(std::make_pair(max[i] > max[i + 1] ? max[i] : max[i + 1],
 						max[i] < max[i + 1] ? max[i] : max[i + 1]));
 				}
+				if (max.size() % 2 == 1) // Impair == min if size > 3
+					pair.push_back(std::make_pair(-1, max.back())); // Pair with smaller min
+				if (max.size() == 3)
+				{
+					pair.push_back(std::make_pair(max[1] > max[2] ? max[1] : max[2], max[1] < max[2] ? max[1] : max[2]));
+				}
 				max.clear();
 				for (std::size_t i = size; i < pair.size(); i++)
+				{
+					if (pair[i].first == -1)
+						continue ;
 					max.push_back(pair[i].first);
+				}
 			}
-			if (vector.size() % 2 == 1)
-				pair.push_back(std::make_pair(-1, vector.back()));
-			if (pair.size() == 2 && pair[1].second == -1)
-				pair[0].first = pair[0].second > pair[1].second ? pair[0].second : pair[1].second;
+
+
+			// start print test
 			std::cout << std::endl << "Stack : " << std::endl;
 			for (std::size_t i = 0; i < pair.size(); i++)
 				std::cout << GREEN << pair[i].first << " " << RED << pair[i].second << std::endl;
-			std::cout << GREEN << pair.size() << RED << " ,impair int: " << pair[pair.size() - 1].second << NC << std::endl;
+			// MAX
+			std::cout << std::endl << GREEN << "MAX" << std::endl;
+			for (std::size_t i = 0; i < max.size(); i++)
+				std::cout << BLUE << max[i] << NC << std::endl;
+
+			// end print test
 			if (max.size() > 1)
 				max = this->sortPerPair(pair, max);
-			std::cout << std::endl << pair[0].first << " ," << pair[0].second << std::endl;
 			return max;
 		}
 
