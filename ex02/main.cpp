@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/27 12:34:50 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/27 15:45:27 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static void ParseInput(int ac, char **av)
 {
-	if (ac == 1)
+	if (ac == 1) // Maybe != 3
 		throw std::string("Too few arguments!");
 	for (int i = 1 ; av[i] != NULL ; i++)
 	{
