@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/25 11:33:19 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/27 09:37:56 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,31 +64,9 @@ int binary_search(std::vector<int> start, int target)
 	return -1;
 }
 
-std::vector<int> PmergeMe::sortPerPair(std::vector<int> vectore)
-{
-	std::vector<int> max, min;
-
-	for (std::size_t i = 0; i < vectore.size() - 1; i += 2)
-	{
-		min.push_back(vectore[i] < vectore[i + 1] ? vectore[i] : vectore[i + 1]);
-		max.push_back(vectore[i] > vectore[i + 1] ? vectore[i] : vectore[i + 1]);
-	}
-	if (vectore.size() % 2 == 1)
-		min.push_back(vectore.back());
-	if (max.size() == 1 && min.size() == 2)
-		max.push_back(min[0] > min[1] ? min[0] : min[1]);
-	std::cout << std::endl << "Stack : " << std::endl;
-	for (std::size_t i = 0; i < max.size(); i++)
-		std::cout << GREEN << max[i] << " " << RED << min[i] << std::endl;
-	std::cout << GREEN << max.size() << " " << RED << min.size() << " ,impair int: " << min[min.size() - 1] << NC << std::endl;
-	if (max.size() > 1)
-		max = this->sortPerPair(max);
-	std::cout << std::endl << max[0] << std::endl;
-	return max;
-}
-
 void PmergeMe::execute()
 {
 	std::cout << GREEN << "Executing..." << NC << std::endl;
-	this->sortPerPair(vector);
+	this->sortPerPair(pairVector);
+	this->sortPerPair(pairDeque);
 }
