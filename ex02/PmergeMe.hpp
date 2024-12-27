@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/27 12:22:10 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/27 13:26:38 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,11 @@ class PmergeMe
 	private:
 		std::vector<int> vector;
 		std::vector<int> maxVector;
+		std::vector<int> minVector;
 		std::vector< std::pair<int, int> > pairVector;
 		std::deque<int> deque;
 		std::deque<int> maxDeque;
+		std::deque<int> minDeque;
 		std::deque< std::pair<int, int> > pairDeque;
 	public:
 		PmergeMe();
