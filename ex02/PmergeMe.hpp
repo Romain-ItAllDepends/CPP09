@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/27 15:51:41 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/28 11:27:28 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,17 @@
 # define BLUE "\033[0;34m"
 # define RED "\033[0;31m"
 # define NC "\033[0m" // No Color
+# define BOLD "\033[1m"
+
+# define PRINT "std::cout << "
+# define PRINTG "std::cout << GREEN << "
+# define PRINTB "std::cout << BLUE << "
+# define PRINTR "std::cout << RED << "
+# define PRINTGB "std::cout << GREEN << BOLD << "
+# define PRINTBB "std::cout << BLUE << BOLD << "
+# define PRINTRB "std::cout << RED << BOLD << "
+# define N " << "
+# define F " << NC << std::endl;"
 
 class PmergeMe
 {
@@ -73,13 +84,11 @@ class PmergeMe
 				}
 				if (max.size() % 2 == 1) // Impair == min if size > 3 / test if sort 3 values
 					pair.push_back(std::make_pair(tmp > max.back() ? tmp : max.back(), tmp < max.back() ? tmp : max.back())); // Pair with smaller min
-				if (max.size() == 3)
-					pair.push_back(std::make_pair(max[1] > max[2] ? max[1] : max[2], max[1] < max[2] ? max[1] : max[2]));
 				max.clear();
 				for (std::size_t i = size; i < pair.size(); i++) // need to lock 88 after save once
 				{
-					if (pair[i].first == -1 || pair[i].first == tmp) // problem can't take any value
-						continue ; // make re && ./PmergeMe 3 10 8 18 4 16 12 13 2 15 7 9 20 17 1 19 11 14 6 5 88
+					if (pair.size() - size % 2 == 1 && i == pair.size()) // exclude the last element because it's the place of impair element
+						continue ;
 					max.push_back(pair[i].first);
 				}
 			}
