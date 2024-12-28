@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/27 15:27:34 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/28 14:33:05 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ void PmergeMe::execute()
 {
 	std::cout << GREEN << "Executing..." << NC << std::endl;
 	this->sortPerPair(pairVector, maxVector);
+	this->insertion(pairVector, maxVector);
 	// this->sortPerPair(pairDeque, maxDeque);
 }

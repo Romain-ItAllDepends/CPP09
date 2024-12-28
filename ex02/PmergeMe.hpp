@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/28 11:27:28 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/28 14:34:07 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,11 @@ class PmergeMe
 			if (max.size() > 1)
 				max = this->sortPerPair(pair, max);
 			return max;
+		}
+		template< typename C, typename M >
+		M insertion(C &pair, M &max)
+		{
+
 		}
 
 		PmergeMe &operator=(PmergeMe const &obj);
