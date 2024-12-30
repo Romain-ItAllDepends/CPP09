@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/28 14:33:05 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/30 12:15:38 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void PmergeMe::fill(char **av)
 	{
 		vector.push_back(std::atoi(av[i]));
 		deque.push_back(std::atoi(av[i]));
+		maxVector.push_back(vector[i - 1]);
+		maxDeque.push_back(deque[i - 1]);
 		if (i != 1)
 			std::cout << ", " << vector.back();
 		else
@@ -66,8 +68,8 @@ int binary_search(std::vector<int> start, int target)
 
 void PmergeMe::execute()
 {
-	std::cout << GREEN << "Executing..." << NC << std::endl;
-	this->sortPerPair(pairVector, maxVector);
-	this->insertion(pairVector, maxVector);
+	PRINTGB "Executing..."  END;
+	this->sortPerPair(pairVector, maxVector, minVector);
+	// this->insertion(pairVector, maxVector);
 	// this->sortPerPair(pairDeque, maxDeque);
 }

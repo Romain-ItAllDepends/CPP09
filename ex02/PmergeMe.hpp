@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/28 14:34:07 by rgobet           ###   ########.fr       */
+/*   Updated: 2024/12/30 12:37:51 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <cstdlib>
 # include <iostream>
 # include <algorithm>
+
 
 # define GREEN "\033[0;32m"
 # define BLUE "\033[0;34m"
@@ -34,7 +35,7 @@
 # define PRINTBB "std::cout << BLUE << BOLD << "
 # define PRINTRB "std::cout << RED << BOLD << "
 # define N " << "
-# define F " << NC << std::endl;"
+# define END " << NC << std::endl"
 
 class PmergeMe
 {
@@ -55,44 +56,29 @@ class PmergeMe
 		void fill(char **av);
 		void execute();
 		template< typename C, typename M >
-		M sortPerPair(C &pair, M &max) // vector modif pour deque aussi
+		M sortPerPair(C &pair, M &maxi, M &mini)
 		{
-			int size = pair.size(), tmp = 0;
+			int size = pair.size();
 
-			if (pair.size() == 0)
+			for (std::size_t i = 0; i < maxi.size() - 1; i += 2)
 			{
-				for (std::size_t i = 0; i < vector.size() - 1; i += 2)
-				{
-					pair.push_back(std::make_pair(vector[i] > vector[i + 1] ? vector[i] : vector[i + 1],
-						vector[i] < vector[i + 1] ? vector[i] : vector[i + 1]));
-					max.push_back(vector[i] > vector[i + 1] ? vector[i] : vector[i + 1]);
-					tmp = pair.back().second;
-				}
-				if (vector.size() % 2 == 1)
-				{
-					pair.push_back(std::make_pair(tmp > vector.back() ? tmp : vector.back(), tmp < vector.back() ? tmp : vector.back()));
-					max.push_back(pair.back().first);
-				}
+				pair.push_back(std::make_pair(std::max(maxi[i], maxi[i + 1]), std::min(maxi[i], maxi[i + 1])));
+				if (std::find(mini.begin(), mini.end(), pair.back().second) == mini.end())
+					mini.push_back(pair.back().second);
 			}
-			else
+			if (maxi.size() == 3 || (mini.empty() == false && *std::max_element(mini.begin(), mini.end()) < maxi.back()))
+				pair.push_back(std::make_pair(std::max(pair.back().second, maxi.back()), -1));
+			else if (maxi.size() % 2 == 1) // Impair == min if size > 3 / test if sort 3 values
+				pair.push_back(std::make_pair(-1, maxi.back())); // Pair with smaller min
+			maxi.clear();
+			for (std::size_t i = size; i < pair.size(); i++) // need to lock 88 after save once
 			{
-				for (std::size_t i = 0; i < max.size() - 1; i += 2)
-				{
-					pair.push_back(std::make_pair(max[i] > max[i + 1] ? max[i] : max[i + 1],
-						max[i] < max[i + 1] ? max[i] : max[i + 1]));
-					tmp = pair.back().second;
-				}
-				if (max.size() % 2 == 1) // Impair == min if size > 3 / test if sort 3 values
-					pair.push_back(std::make_pair(tmp > max.back() ? tmp : max.back(), tmp < max.back() ? tmp : max.back())); // Pair with smaller min
-				max.clear();
-				for (std::size_t i = size; i < pair.size(); i++) // need to lock 88 after save once
-				{
-					if (pair.size() - size % 2 == 1 && i == pair.size()) // exclude the last element because it's the place of impair element
-						continue ;
-					max.push_back(pair[i].first);
-				}
+				if (pair.size() - size % 2 == 1 && i == pair.size()) // exclude the last element because it's the place of impair element
+					continue ;
+				maxi.push_back(pair[i].first);
 			}
 
+			// make re && ./PmergeMe 3 10 8 18 4 16 12 13 2 15 7 9 20 17 1 19 11 14 6 5 88
 
 			// start print test
 			std::cout << std::endl << "Stack : " << std::endl;
@@ -100,19 +86,19 @@ class PmergeMe
 				std::cout << GREEN << pair[i].first << " " << RED << pair[i].second << std::endl;
 			// MAX
 			std::cout << std::endl << GREEN << "MAX" << std::endl;
-			for (std::size_t i = 0; i < max.size(); i++)
-				std::cout << BLUE << max[i] << NC << std::endl;
+			for (std::size_t i = 0; i < maxi.size(); i++)
+				std::cout << BLUE << maxi[i] << NC << std::endl;
 
 			// end print test
-			if (max.size() > 1)
-				max = this->sortPerPair(pair, max);
-			return max;
+			if (maxi.size() > 1)
+				maxi = this->sortPerPair(pair, maxi, mini);
+			return maxi;
 		}
-		template< typename C, typename M >
-		M insertion(C &pair, M &max)
-		{
-
-		}
+		// template< typename C, typename M >
+		// M insertion(C &pair, M &max)
+		// {
+		//
+		// }
 
 		PmergeMe &operator=(PmergeMe const &obj);
 };
