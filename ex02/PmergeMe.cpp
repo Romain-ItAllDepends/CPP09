@@ -40,6 +40,8 @@ void PmergeMe::fill(char **av)
 	std::cout << GREEN << "Begin: ";
 	for (int i = 1; av[i]; i++)
 	{
+		if (vector.empty() == false && std::find(vector.begin(), vector.end(), std::atoi(av[i])) != vector.end())
+			throw "Doublon (dois etre traduis)";
 		vector.push_back(std::atoi(av[i]));
 		deque.push_back(std::atoi(av[i]));
 		maxVector.push_back(vector[i - 1]);
@@ -68,7 +70,7 @@ int binary_search(std::vector<int> start, int target)
 
 void PmergeMe::execute()
 {
-	PRINTGB "Executing..."  END;
+	std::cout << GREEN << "Executing..." << NC << std::endl;
 	this->sortPerPair(pairVector, maxVector, minVector);
 	// this->insertion(pairVector, maxVector);
 	// this->sortPerPair(pairDeque, maxDeque);

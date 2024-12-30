@@ -27,16 +27,6 @@
 # define NC "\033[0m" // No Color
 # define BOLD "\033[1m"
 
-# define PRINT "std::cout << "
-# define PRINTG "std::cout << GREEN << "
-# define PRINTB "std::cout << BLUE << "
-# define PRINTR "std::cout << RED << "
-# define PRINTGB "std::cout << GREEN << BOLD << "
-# define PRINTBB "std::cout << BLUE << BOLD << "
-# define PRINTRB "std::cout << RED << BOLD << "
-# define N " << "
-# define END " << NC << std::endl"
-
 class PmergeMe
 {
 	private:
