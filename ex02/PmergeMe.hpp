@@ -69,7 +69,7 @@ class PmergeMe
 			}
 
 			// make re && ./PmergeMe 3 10 8 18 4 16 12 13 2 15 7 9 20 17 1 19 11 14 6 5 88
-			// Bug compare avec lui meme quand il en reste 2
+
 			// start print test
 			std::cout << std::endl << "Stack : " << std::endl;
 			for (std::size_t i = size; i < pair.size(); i++)
@@ -82,13 +82,21 @@ class PmergeMe
 			// end print test
 			if (maxi.size() > 1)
 				maxi = this->sortPerPair(pair, maxi, mini);
+			this->sortMax(maxi, mini);
 			return maxi;
 		}
-		// template< typename C, typename M >
-		// M insertion(C &pair, M &max)
-		// {
-		//
-		// }
+		template< typename M >
+		M sortMax(M &maxi, M &mini)
+		{
+			if (maxi.size() == 1)
+			{
+				maxi.push_back(mini.back());
+				return maxi;
+			}
+			// Coupe min en groupe (avec la suite de jacobsthal) et les inverse (les nombres de chaque groupe)
+			// insert chaque nombre en utilisant binary search
+			return maxi;
+		}
 
 		PmergeMe &operator=(PmergeMe const &obj);
 };
