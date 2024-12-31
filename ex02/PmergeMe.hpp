@@ -56,7 +56,7 @@ class PmergeMe
 				if (std::find(mini.begin(), mini.end(), pair.back().second) == mini.end())
 					mini.push_back(pair.back().second);
 			}
-			if (maxi.size() == 3 || (mini.empty() == false && *std::max_element(mini.begin(), mini.end()) < maxi.back()))
+			if (maxi.size() == 3 || (mini.empty() == false && *std::max_element(mini.begin(), mini.end()) < maxi.back() && maxi.size() % 2 == 1))
 				pair.push_back(std::make_pair(std::max(pair.back().second, maxi.back()), -1));
 			else if (maxi.size() % 2 == 1) // Impair == min if size > 3 / test if sort 3 values
 				pair.push_back(std::make_pair(-1, maxi.back())); // Pair with smaller min
@@ -69,10 +69,10 @@ class PmergeMe
 			}
 
 			// make re && ./PmergeMe 3 10 8 18 4 16 12 13 2 15 7 9 20 17 1 19 11 14 6 5 88
-
+			// Bug compare avec lui meme quand il en reste 2
 			// start print test
 			std::cout << std::endl << "Stack : " << std::endl;
-			for (std::size_t i = 0; i < pair.size(); i++)
+			for (std::size_t i = size; i < pair.size(); i++)
 				std::cout << GREEN << pair[i].first << " " << RED << pair[i].second << std::endl;
 			// MAX
 			std::cout << std::endl << GREEN << "MAX" << std::endl;
