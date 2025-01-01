@@ -32,11 +32,9 @@ class PmergeMe
 	private:
 		std::vector<int> vector;
 		std::vector<int> maxVector;
-		std::vector<int> minVector;
 		std::vector< std::pair<int, int> > pairVector;
 		std::deque<int> deque;
 		std::deque<int> maxDeque;
-		std::deque<int> minDeque;
 		std::deque< std::pair<int, int> > pairDeque;
 	public:
 		PmergeMe();
@@ -46,15 +44,15 @@ class PmergeMe
 		void fill(char **av);
 		void execute();
 		template< typename C, typename M >
-		M sortPerPair(C &pair, M &maxi, M &mini)
+		M sortPerPair(C &pair, M &maxi)
 		{
 			int size = pair.size();
+			M mini;
 
 			for (std::size_t i = 0; i < maxi.size() - 1; i += 2)
 			{
 				pair.push_back(std::make_pair(std::max(maxi[i], maxi[i + 1]), std::min(maxi[i], maxi[i + 1])));
-				if (std::find(mini.begin(), mini.end(), pair.back().second) == mini.end())
-					mini.push_back(pair.back().second);
+				mini.push_back(pair.back().second);
 			}
 			if (maxi.size() == 3 || (mini.empty() == false && *std::max_element(mini.begin(), mini.end()) < maxi.back() && maxi.size() % 2 == 1))
 				pair.push_back(std::make_pair(std::max(pair.back().second, maxi.back()), -1));
@@ -81,17 +79,27 @@ class PmergeMe
 
 			// end print test
 			if (maxi.size() > 1)
-				maxi = this->sortPerPair(pair, maxi, mini);
-			this->sortMax(maxi, mini);
+				maxi = this->sortPerPair(pair, maxi);
+			this->sortAndMerge(maxi, mini);
 			return maxi;
 		}
+
 		template< typename M >
-		M sortMax(M &maxi, M &mini)
+		M sortAndMerge(M &maxi, M &mini)
 		{
+			// print min
+			std::cout << BLUE << std::endl << mini.size() << NC << std::endl;
+			for (std::size_t i = 0; i < mini.size(); i++)
+				std::cout << BLUE << mini[i] << NC << std::endl;
+			// end print
 			if (maxi.size() == 1)
 			{
 				maxi.push_back(mini.back());
 				return maxi;
+			}
+			for (std::vector<int>::iterator it = mini.begin() ; it != mini.end(); ++it)
+			{
+
 			}
 			// Coupe min en groupe (avec la suite de jacobsthal) et les inverse (les nombres de chaque groupe)
 			// insert chaque nombre en utilisant binary search

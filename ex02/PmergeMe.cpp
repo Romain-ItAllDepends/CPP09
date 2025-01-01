@@ -69,6 +69,6 @@ int binary_search(std::vector<int> start, int target)
 void PmergeMe::execute()
 {
 	std::cout << GREEN << "Executing..." << NC << std::endl;
-	this->sortPerPair(pairVector, maxVector, minVector);
+	this->sortPerPair(pairVector, maxVector);
 	// this->sortPerPair(pairDeque, maxDeque);
 }
