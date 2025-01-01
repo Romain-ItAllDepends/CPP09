@@ -84,6 +84,8 @@ class PmergeMe
 			this->sortAndMerge(maxi, mini);
 			return maxi;
 		}
+
+		// Norme
 		size_t test(size_t n)
 		{
 			std::vector<int> jacob(2, 2);
