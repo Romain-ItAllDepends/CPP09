@@ -84,18 +84,24 @@ class PmergeMe
 			this->sortAndMerge(maxi, mini);
 			return maxi;
 		}
+		size_t test(size_t n)
+		{
+			std::vector<int> jacob(2, 2);
+			size_t tmp = 2;
+
+			for (size_t i = 2 ; i < n && tmp <= n ; i++)
+			{
+				tmp = jacob[i - 1] + 2 * jacob[i - 2];
+				jacob.push_back(tmp);
+				std::cout << BLUE << n << " TEST N: " << tmp << NC << std::endl;
+			}
+			return tmp;
+		}
 
 		template< typename M >
 		M sortAndMerge(M &maxi, M &mini)
 		{
-			static int n = 0;
-			int tmp;
-			tmp = n - 1 + 2 * (n - 2);
-			n++;
-			std::cout << BLUE << "TEST N: " << tmp << NC << std::endl;
-
 			// print min
-			std::cout << BLUE << std::endl << mini.size() << NC << std::endl;
 			for (std::size_t i = 0; i < mini.size(); i++)
 				std::cout << BLUE << mini[i] << NC << std::endl;
 			// end print
@@ -104,10 +110,7 @@ class PmergeMe
 				maxi.push_back(mini.back());
 				return maxi;
 			}
-			// for (std::vector<int>::iterator it = mini.begin() ; it != mini.end(); ++it)
-			// {
-			//
-			// }
+			test(mini.size());
 			// Coupe min en groupe (avec la suite de jacobsthal) et les inverse (les nombres de chaque groupe)
 			// insert chaque nombre en utilisant binary search
 			return maxi;
