@@ -16,6 +16,7 @@
 # include <deque>
 # include <vector>
 # include <time.h>
+# include <cmath>
 # include <cstdlib>
 # include <iostream>
 # include <algorithm>
@@ -87,6 +88,12 @@ class PmergeMe
 		template< typename M >
 		M sortAndMerge(M &maxi, M &mini)
 		{
+			static int n = 0;
+			int tmp;
+			tmp = n - 1 + 2 * (n - 2);
+			n++;
+			std::cout << BLUE << "TEST N: " << tmp << NC << std::endl;
+
 			// print min
 			std::cout << BLUE << std::endl << mini.size() << NC << std::endl;
 			for (std::size_t i = 0; i < mini.size(); i++)
@@ -97,10 +104,10 @@ class PmergeMe
 				maxi.push_back(mini.back());
 				return maxi;
 			}
-			for (std::vector<int>::iterator it = mini.begin() ; it != mini.end(); ++it)
-			{
-
-			}
+			// for (std::vector<int>::iterator it = mini.begin() ; it != mini.end(); ++it)
+			// {
+			//
+			// }
 			// Coupe min en groupe (avec la suite de jacobsthal) et les inverse (les nombres de chaque groupe)
 			// insert chaque nombre en utilisant binary search
 			return maxi;
