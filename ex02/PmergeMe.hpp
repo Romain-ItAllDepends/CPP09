@@ -121,10 +121,8 @@ class PmergeMe
 						j = count + split[n];
 					else
 						j = mini.size() - 1;
-					for (std::size_t i = j ; i <= count ; --i)
-					{
+					for (std::size_t i = j ; i <= count ; i--)
 						tmp.push_back(mini[i]); // Error here
-					}
 					count += split[n];
 				}
 				mini = tmp;
