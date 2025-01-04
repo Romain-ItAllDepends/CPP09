@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2025/01/04 11:49:36 by rgobet           ###   ########.fr       */
+/*   Updated: 2025/01/04 12:19:09 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ class PmergeMe
 					mini.push_back(pair[i].second);
 			}
 
-			// make re && ./PmergeMe 3 10 8 18 4 16 12 13 2 15 7 9 20 17 1 19 11 14 6 5 88
+			// make re && valgrind ./PmergeMe 3 10 8 18 4 16 12 13 2 15 7 9 20 17 1 19 11 14 6 5 88
 
 			// start print test
 			std::cout << std::endl << "Stack : " << std::endl;
@@ -136,18 +136,24 @@ class PmergeMe
 		}
 
 		template< typename M >
-		static int binarySearch(M start, int target)
+		static std::size_t binarySearch(M start, int target)
 		{
-			for (std::size_t i = 0 ; i != start.size() - 1 ; i++)
+			std::size_t i = 0;
+
+			std::cout << BLUE << target << NC << std::endl;
+			for (; i < start.size() - 1 ; i++)
 			{
-				if (start[i + start.size() / 2] > target)
+				std::cout << "size: " << start.size() << " " << std::floor(i + start.size() / 2) << std::endl;
+				std::cout << std::floor(i + start.size() / 2) << std::endl;
+				if (start[std::floor(i + start.size() / 2)] > target)
 					i = i + start.size() / 2 - 1;
-				else if (start[i + start.size() / 2] < target)
-					i = i + start.size() / 2 + 1;
+				else if (start[std::floor(i + start.size() / 2)] < target)
+					i = std::floor(i + start.size() / 2 + 1);
 				else
 					return i;
 			}
-			throw std::string("Error: binary search failure!");
+			std::cout << BLUE << "Binary Search : " << target  << " index: " << i << NC << std::endl;
+			return i;
 		}
 
 		template< typename M >
