@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/30 12:37:51 by rgobet           ###   ########.fr       */
+/*   Updated: 2025/01/04 11:49:36 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,30 +103,52 @@ class PmergeMe
 
 		template< typename M >
 		static void setupSections(M &split, M &mini)
-			{
-				std::size_t count = 0;
-				int j;
-				M tmp;
+		{
+			std::size_t count = 0;
+			int j;
+			M tmp;
 
-				for (std::size_t i = 0; i < mini.size() && i < 4; i += 2)
-				{
-					if (mini.size() > i + 1)
-						tmp.push_back(mini[i + 1]);
-					tmp.push_back(mini[i]);
-					count += 2;
-				}
-				for (std::size_t n = 2 ; n < split.size() && mini.size() > 4 ; n++)
-				{
-					if (mini.size() > count + split[n])
-						j = count + split[n];
-					else
-						j = mini.size() - 1;
-					for (std::size_t i = j ; i <= count ; i--)
-						tmp.push_back(mini[i]); // Error here
-					count += split[n];
-				}
-				mini = tmp;
+			// print split (suite jacob)
+			// std::cout << std::endl;
+			// for (std::size_t i = 0; i < split.size(); i++)
+			// 	std::cout << GREEN << split[i] << ", " << NC;
+			// std::cout << std::endl;
+			// end print
+
+			for (std::size_t i = 0; i < mini.size() && i < 4; i += 2)
+			{
+				if (mini.size() > i + 1)
+					tmp.push_back(mini[i + 1]);
+				tmp.push_back(mini[i]);
+				count += 2;
 			}
+			for (std::size_t n = 2 ; n < split.size() && mini.size() > 4 && mini.size() != tmp.size() ; n++)
+			{
+				if (mini.size() - 1 >= count + split[n])
+					j = count + split[n] - 1;
+				else
+					j = mini.size() - 1;
+				for (std::size_t i = j ; i >= count ; i--)
+					tmp.push_back(mini[i]);
+				count += split[n];
+			}
+			mini = tmp;
+		}
+
+		template< typename M >
+		static int binarySearch(M start, int target)
+		{
+			for (std::size_t i = 0 ; i != start.size() - 1 ; i++)
+			{
+				if (start[i + start.size() / 2] > target)
+					i = i + start.size() / 2 - 1;
+				else if (start[i + start.size() / 2] < target)
+					i = i + start.size() / 2 + 1;
+				else
+					return i;
+			}
+			throw std::string("Error: binary search failure!");
+		}
 
 		template< typename M >
 		M sortAndMerge(M &maxi, M &mini)
@@ -143,18 +165,26 @@ class PmergeMe
 
 			if (mini.empty() == true)
 				throw std::string("Error: An empty container has been detected!");
-			if (maxi.size() == 1)
-				maxi.push_back(mini.back());
-			else
-				split = suitJacobsthal(mini);
+			split = suitJacobsthal(mini);
 			if (maxi.size() != 1)
 				setupSections(split, mini);
-
+			for (std::size_t i = 0 ; i < mini.size() ; i++)
+				maxi.insert(maxi.begin() += binarySearch(maxi, mini[i]), mini[i]);
+			//
 			// print min
-			std::cout << std::endl << RED << mini.size() << " END" << std::endl;
+			// std::cout << std::endl << RED << mini.size() << " END" << std::endl;
+			// std::cout << std::endl;
+			// for (std::size_t i = 0; i < mini.size(); i++)
+			// 	std::cout << BLUE << mini[i] << ", " << NC;
+			// std::cout << std::endl;
+			// end print
+
+
+			// print max
+			std::cout << std::endl << RED << maxi.size() << " END" << std::endl;
 			std::cout << std::endl;
-			for (std::size_t i = 0; i < mini.size(); i++)
-				std::cout << BLUE << mini[i] << ", " << NC;
+			for (std::size_t i = 0; i < maxi.size(); i++)
+				std::cout << BLUE << maxi[i] << ", " << NC;
 			std::cout << std::endl;
 			// end print
 
