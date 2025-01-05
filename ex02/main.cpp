@@ -42,11 +42,11 @@ int main(int ac, char **av)
 		merge.execute();
 	} catch (const std::string &error)
 	{
-		std::cerr << RED << "Error: " << error << NC << std::endl;
+		std::cerr << RED << BOLD << "Error: " << error << NC << std::endl;
 		return 1;
 	} catch (const std::exception &error)
 	{
-		std::cerr << RED << "Error: " << error.what() << NC << std::endl;
+		std::cerr << RED << BOLD << "Error: " << error.what() << NC << std::endl;
 		return 2;
 	}
 	return 0;

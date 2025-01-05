@@ -15,9 +15,10 @@
 
 # include <deque>
 # include <vector>
-# include <time.h>
+# include <ctime>
 # include <cmath>
 # include <cstdlib>
+# include <iomanip>
 # include <iostream>
 # include <algorithm>
 
@@ -79,13 +80,13 @@ class PmergeMe
 			// make re && valgrind ./PmergeMe 3 10 8 18 4 16 12 13 2 15 7 9 20 17 1 19 11 14 6 5 88
 
 			// start print test
-			std::cout << std::endl << "Stack : " << std::endl;
-			for (std::size_t i = size; i < pair.size(); i++)
-				std::cout << GREEN << pair[i].first << " " << RED << pair[i].second << std::endl;
-			// MAX
-			std::cout << std::endl << GREEN << "MAX" << std::endl;
-			for (std::size_t i = 0; i < maxi.size(); i++)
-				std::cout << BLUE << maxi[i] << NC << std::endl;
+			// std::cout << std::endl << "Stack : " << std::endl;
+			// for (std::size_t i = size; i < pair.size(); i++)
+			// 	std::cout << GREEN << pair[i].first << " " << RED << pair[i].second << std::endl;
+			// // MAX
+			// std::cout << std::endl << GREEN << "MAX" << std::endl;
+			// for (std::size_t i = 0; i < maxi.size(); i++)
+			// 	std::cout << BLUE << maxi[i] << NC << std::endl;
 
 			// end print test
 			if (maxi.size() > 1)
@@ -146,42 +147,21 @@ class PmergeMe
 		}
 
 		template< typename M >
-		static std::size_t binarySearch(M start, int target)
+		static std::size_t binarySearch(M container, int target)
 		{
-			std::size_t i = 0;
-			std::size_t mid = std::floor(i + start.size() / 2), old = -1;
+			int left = 0, right = container.size() - 1, mid = 0;
 
-			// std::cout << BLUE << target << NC << std::endl;
-			
-			for (; i <= start.size() - 1 ; i++)
+			while (left <= right)
 			{
-				std::cout << "size: " << start.size() << std::endl << 
-				start[mid] << " > " << target << std::endl;
-				// std::cout << start[std::floor(i + start.size() / 2)] << " < "
-				//  << target << std::endl;
-
-
-				
-				// std::cout << RED << "OLD: " << old << NC << std::endl;
-				// std::cout << GREEN << mid << ", " << target << ", " << start.size() -1 << NC << std::endl;
-				if (mid < start.size() && start[mid] > target)
-				{
-					std::cout << "-1" << start[mid] << " > " << target  << 
-					RED << mid << NC << std::endl;
-					i = mid - 1;
-				}
-				else if (mid < start.size() && start[mid] < target)
-				{
-					std::cout << "+1" << start[mid] << " > " << target << std::endl;
-					i = mid + 1;
-				}
-				old = mid;
-				mid = std::floor(i + start.size() / 2);
-				if (mid == old)
-					return i;
+				mid = (left + right) / 2;
+				if (container[mid] == target)
+					return mid;
+				if (container[mid] < target)
+					left = mid + 1;
+				else if (container[mid] > target)
+					right = mid - 1;
 			}
-			// std::cout << BLUE << "Binary Search : " << target  << " index: " << i << NC << std::endl;
-			return i;
+			return left;
 		}
 
 		template< typename M >
@@ -190,22 +170,22 @@ class PmergeMe
 			M split;
 
 			// print min
-			std::cout << std::endl << RED << mini.size()  << " START" << std::endl;
-			std::cout << std::endl;
-			for (std::size_t i = 0; i < mini.size(); i++)
-				std::cout << BLUE << mini[i] << ", " << NC;
-			std::cout << std::endl;
+			// std::cout << std::endl << RED << mini.size()  << " START" << std::endl;
+			// std::cout << std::endl;
+			// for (std::size_t i = 0; i < mini.size(); i++)
+			// 	std::cout << BLUE << mini[i] << ", " << NC;
+			// std::cout << std::endl;
 			// end print
 			if (mini.size() == 1)
 			{
 				maxi.insert(maxi.begin(), mini[0]);
 
 				// print max
-				std::cout << std::endl << RED << maxi.size() << " END" << std::endl;
-				std::cout << std::endl;
-				for (std::size_t i = 0; i < maxi.size(); i++)
-					std::cout << BLUE << maxi[i] << ", " << NC;
-				std::cout << std::endl;
+				// std::cout << std::endl << RED << maxi.size() << " END" << std::endl;
+				// std::cout << std::endl;
+				// for (std::size_t i = 0; i < maxi.size(); i++)
+				// 	std::cout << BLUE << maxi[i] << ", " << NC;
+				// std::cout << std::endl;
 				// end print
 				
 				return maxi;
@@ -228,11 +208,11 @@ class PmergeMe
 
 
 			// print max
-			std::cout << std::endl << RED << maxi.size() << " END" << std::endl;
-			std::cout << std::endl;
-			for (std::size_t i = 0; i < maxi.size(); i++)
-				std::cout << BLUE << maxi[i] << ", " << NC;
-			std::cout << std::endl;
+			// std::cout << std::endl << RED << maxi.size() << " END" << std::endl;
+			// std::cout << std::endl;
+			// for (std::size_t i = 0; i < maxi.size(); i++)
+			// 	std::cout << BLUE << maxi[i] << ", " << NC;
+			// std::cout << std::endl;
 			// end print
 
 			// Need to merge
@@ -240,6 +220,22 @@ class PmergeMe
 			// Coupe min en groupe (avec la suite de jacobsthal) et les inverse (les nombres de chaque groupe)
 			// insert chaque nombre en utilisant binary search
 			return maxi;
+		}
+
+		template< typename M >
+		void display(M &c, bool e)
+		{
+			for (std::size_t i = 0 ; i < c.size() ; i++)
+			{
+				if (i == c.size() - 1 && e == false)
+					PRINTG c[i] END
+				else if (e == false)
+					PRINTG c[i] N ", " N NC;
+				if (i == c.size() - 1 && e == true)
+					PRINTRB c[i] END
+				else if (e == true)
+					PRINTRB c[i] N ", " N NC;
+			}
 		}
 
 		PmergeMe &operator=(PmergeMe const &obj);
