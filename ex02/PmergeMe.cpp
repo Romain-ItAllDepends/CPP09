@@ -56,8 +56,7 @@ void PmergeMe::execute()
 {
 	std::vector<int> v;
 	std::deque<int> d;
-	std::clock_t start;
-	double ms;
+	double start, duration;
 
 	for (std::size_t i = 0; i < maxVector.size(); i++)
 	{
@@ -69,14 +68,14 @@ void PmergeMe::execute()
 	PRINTG "After:   ";
 	display(v, false);
 	PRINT NC END
-	start = std::clock();
+	start = getTime();
 	this->sortPerPair(pairVector, maxVector);
-	ms = static_cast<double>(std::clock() - start) / CLOCKS_PER_SEC * 1000000;
-	PRINTG "Time to process a range of " N v.size() N " elements with std::vector : " N std::fixed N std::setprecision(5) N ms N " us" END
-	start = std::clock();
+	duration = (getTime() - start) * 1000000;
+	PRINTG "Time to process a range of " N v.size() N " elements with std::vector : " N std::fixed N std::setprecision(5) N duration N " us" END
+	start = getTime();
 	this->sortPerPair(pairDeque, maxDeque);
-	ms = static_cast<double>(std::clock() - start) / CLOCKS_PER_SEC * 1000000;
-	PRINTG "Time to process a range of " N d.size() N " elements with std::deque : " N std::fixed N std::setprecision(5) N ms N " us" END
+	duration = (getTime() - start) * 1000000;
+	PRINTG "Time to process a range of " N d.size() N " elements with std::deque : " N std::fixed N std::setprecision(5) N duration N " us" END
 
 	for (std::size_t i = 0; i < v.size(); i++)
 	{

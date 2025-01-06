@@ -15,7 +15,7 @@
 
 # include <deque>
 # include <vector>
-# include <ctime>
+# include <sys/time.h>
 # include <cmath>
 # include <cstdlib>
 # include <iomanip>
@@ -37,6 +37,8 @@
 # define PRINTBB std::cout << BLUE << BOLD <<
 # define N <<
 # define END << NC << std::endl;
+
+double getTime();
 
 class PmergeMe
 {

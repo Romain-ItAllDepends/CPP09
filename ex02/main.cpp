@@ -29,6 +29,13 @@ static void ParseInput(int ac, char **av)
 	}
 }
 
+double getTime()
+{
+	struct timeval tv;
+	gettimeofday(&tv, 0);
+	return tv.tv_sec + tv.tv_usec / 1000000.0;
+}
+
 // Parse doublon
 
 int main(int ac, char **av)
