@@ -17,7 +17,7 @@ static void ParseInput(int ac, char **str)
 	std::string input;
 	int j = 1;
 
-	if (ac < 2)
+	if (ac != 2)
 		throw std::string("Wrong number of arguments!");
 	while (str && str[j])
 	{
