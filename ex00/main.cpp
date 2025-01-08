@@ -129,14 +129,14 @@ static bool NameParser(std::string const &name)
 
 int main(int const ac, char *av[])
 {
-	if (ac != 3) {
+	if (ac != 2) {
 		std::cerr << RED << "Error: could not open file." << NC << std::endl;
 		return (1);
 	}
 	std::cout << BLUE << "Data of CSV file parsing: " << NC << std::endl;
-	if (FileParser(av[1]) == false || NameParser(av[1]) == false)
+	if (FileParser("data.csv") == false || NameParser("data.csv") == false)
 		return (1);
-	BitcoinExchange	btc(av[1], av[2]);
+	BitcoinExchange	btc(std::string("data.csv"), av[1]);
 	std::cout << BLUE << "Execution: " << NC << std::endl << std::endl;
 	btc.execute();
 	std::cout << std::endl;
