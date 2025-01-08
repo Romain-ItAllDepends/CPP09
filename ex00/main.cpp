@@ -130,7 +130,7 @@ static bool NameParser(std::string const &name)
 int main(int const ac, char *av[])
 {
 	if (ac != 2) {
-		std::cerr << RED << "Error: could not open file." << NC << std::endl;
+		std::cerr << RED << "Error: Wrong number of arguments." << NC << std::endl;
 		return (1);
 	}
 	std::cout << BLUE << "Data of CSV file parsing: " << NC << std::endl;
