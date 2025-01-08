@@ -16,21 +16,21 @@
 
 bool DateErrorMessage(std::string const &error, std::ifstream &ifs)
 {
-	std::cerr << RED << "Invalid date: " << error << NC << std::endl;
+	std::cerr << RED << "Error: Invalid date: " << error << NC << std::endl;
 	ifs.close();
 	return false;
 }
 
 bool ValueErrorMessage(std::string const &error, std::ifstream &ifs)
 {
-	std::cerr << RED << "Invalid value: " << error << NC << std::endl;
+	std::cerr << RED << "Error: Invalid value: " << error << NC << std::endl;
 	ifs.close();
 	return false;
 }
 
 bool EmptyErrorMessage(std::ifstream &ifs)
 {
-	std::cerr << RED << "An empty date or/and value has been found" << NC << std::endl;
+	std::cerr << RED << "Error: An empty date or/and value has been found" << NC << std::endl;
 	ifs.close();
 	return false;
 }
