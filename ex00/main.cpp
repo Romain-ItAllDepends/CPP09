@@ -10,9 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <algorithm>
-#include <string>
-
 #include "BitcoinExchange.hpp"
 
 static std::string SkipSpaces(const std::string& s)
@@ -26,8 +23,8 @@ static std::string SkipSpaces(const std::string& s)
 
 bool DateParser(std::string const &date, char sep, std::ifstream &ifs)
 {
-	int					dateInt[3] = {atoi(date.substr(0, 4).c_str()),
-		atoi(date.substr(5, 2).c_str()), atoi(date.substr(8, 2).c_str())};
+	int					dateInt[3] = {std::atoi(date.substr(0, 4).c_str()),
+		std::atoi(date.substr(5, 2).c_str()), std::atoi(date.substr(8, 2).c_str())};
 	char				delim[2] = {date[4], date[7]};
 	std::tm				tm = {};
 	std::time_t			t;
@@ -51,7 +48,7 @@ bool VerifyDigitAfterComma(std::string const &str, unsigned int const start)
 
 	if (afterComma.empty())
 		return false;
-	for (size_t i = 1 ; i < afterComma.length() ; i++)
+	for (std::size_t i = 1 ; i < afterComma.length() ; i++)
 	{
 		if ((i > 6 && afterComma[i] != '0') || std::isdigit(afterComma[i]) == false)
 			return false;
@@ -68,7 +65,7 @@ bool ValueParser(std::string const &value, char const sep, std::ifstream &ifs)
 	/* A float can be precise up to seven decimal places */
 	if (parse.empty())
 		return EmptyErrorMessage(ifs);
-	for (size_t i = 0 ; i < parse.length() ; i++)
+	for (std::size_t i = 0 ; i < parse.length() ; i++)
 	{
 		if (parse[i] == '.')
 			dot++;
@@ -124,8 +121,6 @@ static bool NameParser(std::string const &name)
 	}
 	return true;
 }
-
-// Enlever ErrorMessage et replace par throw "Error message";
 
 int main(int const ac, char *av[])
 {

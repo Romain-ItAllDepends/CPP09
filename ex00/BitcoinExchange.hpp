@@ -14,14 +14,15 @@
 # define BITCOINEXCHANGE_HPP
 # include "ErrorMessage.hpp"
 # include <iostream>
+#include <algorithm>
 # include <fstream>
 # include <cstring>
 # include <cstdlib>
-# include <ctime> // mktime
 # include <iomanip>
 # include <sstream>
 # include <limits>
 # include <string>
+# include <ctime>
 # include <map>
 
 # define GREEN "\033[0;32m"
@@ -36,12 +37,8 @@ class BitcoinExchange
 		std::string const				_fileName;
 		std::map<std::string, float>	_bitcoinRate;
 	public:
-		BitcoinExchange();
-		BitcoinExchange(BitcoinExchange const &obj);
-		~BitcoinExchange();
-		BitcoinExchange	&operator=(BitcoinExchange const &obj);
-
 		BitcoinExchange(std::string const &bdd, std::string const &file);
+		~BitcoinExchange();
 
 		void setBitcoinRate();
 
@@ -49,6 +46,10 @@ class BitcoinExchange
 		const char *getDBName() const;
 
 		void execute();
+		private:
+			BitcoinExchange();
+			BitcoinExchange(BitcoinExchange const &obj);
+			BitcoinExchange	&operator=(BitcoinExchange const &obj);
 };
 
 bool ValueParser(std::string const &value, char const sep, std::ifstream &ifs);
