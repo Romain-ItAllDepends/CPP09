@@ -30,12 +30,12 @@ class RPN
 		std::stack<int> stack;
 	public:
 		RPN(void);
-		RPN(const RPN& obj);
 		~RPN(void);
 
-		RPN& operator=(const RPN& obj);
-
 		void execute(char **av);
+	private:
+		RPN(const RPN& obj);
+		RPN& operator=(const RPN& obj);
 };
 
 #endif

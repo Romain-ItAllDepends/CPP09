@@ -44,6 +44,8 @@ void RPN::execute(char **av)
 			{
 				value = stack.top();
 				stack.pop();
+				if (stack.size() == 0)
+					throw std::string("Too much sign!");
 				if (av[i][j] == '/' && (value == 0 || stack.top() == 0))
 					throw std::string("Divisions by zero are impossible!");
 				if (av[i][j] == '+')
@@ -59,7 +61,7 @@ void RPN::execute(char **av)
 			}
 			else if (av[i][j] != ' ')
 			{
-				value = atoi(&av[i][j]);
+				value = std::atoi(&av[i][j]);
 				if (av[i][j + 1] != '\0' && av[i][j + 1] != ' ')
 				{
 					str << value;

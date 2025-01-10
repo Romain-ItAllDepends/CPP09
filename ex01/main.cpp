@@ -19,6 +19,8 @@ static void ParseInput(int ac, char **str)
 
 	if (ac != 2)
 		throw std::string("Wrong number of arguments!");
+	if (str == NULL || str[1][0] == 0)
+		throw std::string("Wrong input!");
 	while (str && str[j])
 	{
 		input = str[j];
@@ -30,8 +32,6 @@ static void ParseInput(int ac, char **str)
 		j++;
 	}
 }
-
-// Selon le sujet maybe limiter a ac == 2 (voir exemple dans le sujet)
 
 int main(int ac, char *av[])
 {
@@ -45,7 +45,7 @@ int main(int ac, char *av[])
 	{
 		std::cerr << RED << "Error: " << error << NC << std::endl;
 		return 1;
-	} catch (std::exception &error) // Maybe a bad idea
+	} catch (std::exception &error)
 	{
 		std::cerr << RED << "Error: " << error.what() << NC << std::endl;
 		return 2;
