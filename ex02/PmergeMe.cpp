@@ -37,19 +37,17 @@ PmergeMe &PmergeMe::operator=(PmergeMe const &obj)
 
 void PmergeMe::fill(char **av)
 {
-	std::cout << GREEN << "Before:  ";
+	PRINTG "Before:  ";
 	for (int i = 1; av[i]; i++)
 	{
-		if (maxVector.empty() == false && std::find(maxVector.begin(), maxVector.end(), std::atoi(av[i])) != maxVector.end())
-			throw "Doublon (dois etre traduis)";
 		maxVector.push_back(std::atoi(av[i]));
 		maxDeque.push_back(std::atoi(av[i]));
 		if (i != 1)
-			std::cout << ", " << maxVector.back();
+			PRINT ", " N maxVector.back();
 		else
-			std::cout << maxVector.back();
+			PRINT maxVector.back();
 	}
-	std::cout << NC << std::endl;
+	PRINT NC << std::endl;
 }
 
 void PmergeMe::execute()
@@ -68,13 +66,13 @@ void PmergeMe::execute()
 	PRINTG "After:   ";
 	display(v, false);
 	PRINT NC END
-	start = getTime();
+	start = std::clock();
 	this->sortPerPair(pairVector, maxVector);
-	duration = (getTime() - start) * 1000000;
+	duration = 1000000.0 * (std::clock() - start) / CLOCKS_PER_SEC;
 	PRINTG "Time to process a range of " N v.size() N " elements with std::vector : " N std::fixed N std::setprecision(5) N duration N " us" END
-	start = getTime();
+	start = std::clock();
 	this->sortPerPair(pairDeque, maxDeque);
-	duration = (getTime() - start) * 1000000;
+	duration = 1000000.0 * (std::clock() - start) / CLOCKS_PER_SEC;
 	PRINTG "Time to process a range of " N d.size() N " elements with std::deque : " N std::fixed N std::setprecision(5) N duration N " us" END
 
 	for (std::size_t i = 0; i < v.size(); i++)

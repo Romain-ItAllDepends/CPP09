@@ -14,7 +14,7 @@
 
 static void ParseInput(int ac, char **av)
 {
-	if (ac == 1) // Maybe != 3
+	if (ac == 1)
 		throw std::string("Too few arguments!");
 	for (int i = 1 ; av[i] != NULL ; i++)
 	{
@@ -29,20 +29,11 @@ static void ParseInput(int ac, char **av)
 	}
 }
 
-double getTime()
-{
-	struct timeval tv;
-	gettimeofday(&tv, 0);
-	return tv.tv_sec + tv.tv_usec / 1000000.0;
-}
-
-// Parse doublon
-
 int main(int ac, char **av)
 {
 	PmergeMe merge;
 
-	try // Manage time in micro sec
+	try
 	{
 		ParseInput(ac, av);
 		merge.fill(av);

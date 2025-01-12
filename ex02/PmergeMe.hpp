@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2025/01/04 12:19:09 by rgobet           ###   ########.fr       */
+/*   Updated: 2025/01/11 14:46:03 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 # define PMERGE_ME_H
 
 # include <deque>
-# include <vector>
-# include <sys/time.h>
+# include <ctime>
 # include <cmath>
+# include <vector>
 # include <cstdlib>
 # include <iomanip>
 # include <iostream>
@@ -38,8 +38,6 @@
 # define N <<
 # define END << NC << std::endl;
 
-double getTime();
-
 class PmergeMe
 {
 	private:
@@ -49,9 +47,11 @@ class PmergeMe
 		std::deque<int> deque;
 		std::deque<int> maxDeque;
 		std::deque< std::pair<int, int> > pairDeque;
+	private:
+		PmergeMe(PmergeMe const &obj);
+		PmergeMe &operator=(PmergeMe const &obj);
 	public:
 		PmergeMe();
-		PmergeMe(PmergeMe const &obj);
 		~PmergeMe();
 
 		void fill(char **av);
@@ -66,38 +66,24 @@ class PmergeMe
 				pair.push_back(std::make_pair(std::max(maxi[i], maxi[i + 1]), std::min(maxi[i], maxi[i + 1])));
 			if (mini.empty() == false && *std::max_element(mini.begin(), mini.end()) < maxi.back() && maxi.size() % 2 == 1)
 				pair.push_back(std::make_pair(std::max(pair.back().second, maxi.back()), -1));
-			else if (maxi.size() % 2 == 1) // Impair == min if size > 3 / test if sort 3 values
-				pair.push_back(std::make_pair(-1, maxi.back())); // Pair with smaller min
+			else if (maxi.size() % 2 == 1)
+				pair.push_back(std::make_pair(-1, maxi.back()));
 			maxi.clear();
-			for (std::size_t i = size; i < pair.size(); i++) // need to lock 88 after save once
+			for (std::size_t i = size; i < pair.size(); i++)
 			{
-				if (pair.size() - size % 2 == 1 && i == pair.size()) // exclude the last element because it's the place of impair element
+				if (pair.size() - size % 2 == 1 && i == pair.size())
 					continue ;
 				if (pair[i].first != -1)
 					maxi.push_back(pair[i].first);
 				if (pair[i].second != -1)
 					mini.push_back(pair[i].second);
 			}
-
-			// make re && valgrind ./PmergeMe 3 10 8 18 4 16 12 13 2 15 7 9 20 17 1 19 11 14 6 5 88
-
-			// start print test
-			// std::cout << std::endl << "Stack : " << std::endl;
-			// for (std::size_t i = size; i < pair.size(); i++)
-			// 	std::cout << GREEN << pair[i].first << " " << RED << pair[i].second << std::endl;
-			// // MAX
-			// std::cout << std::endl << GREEN << "MAX" << std::endl;
-			// for (std::size_t i = 0; i < maxi.size(); i++)
-			// 	std::cout << BLUE << maxi[i] << NC << std::endl;
-
-			// end print test
 			if (maxi.size() > 1)
 				maxi = this->sortPerPair(pair, maxi);
 			this->sortAndMerge(maxi, mini);
 			return maxi;
 		}
 
-		// Norme
 		template< typename M >
 		static M suitJacobsthal(M &mini)
 		{
@@ -119,13 +105,6 @@ class PmergeMe
 			std::size_t count = 0;
 			int j;
 			M tmp;
-
-			// print split (suite jacob)
-			// std::cout << std::endl;
-			// for (std::size_t i = 0; i < split.size(); i++)
-			// 	std::cout << GREEN << split[i] << ", " << NC;
-			// std::cout << std::endl;
-			// end print
 
 			for (std::size_t i = 0; i < mini.size() && i < 4; i += 2)
 			{
@@ -171,25 +150,9 @@ class PmergeMe
 		{
 			M split;
 
-			// print min
-			// std::cout << std::endl << RED << mini.size()  << " START" << std::endl;
-			// std::cout << std::endl;
-			// for (std::size_t i = 0; i < mini.size(); i++)
-			// 	std::cout << BLUE << mini[i] << ", " << NC;
-			// std::cout << std::endl;
-			// end print
 			if (mini.size() == 1)
 			{
 				maxi.insert(maxi.begin(), mini[0]);
-
-				// print max
-				// std::cout << std::endl << RED << maxi.size() << " END" << std::endl;
-				// std::cout << std::endl;
-				// for (std::size_t i = 0; i < maxi.size(); i++)
-				// 	std::cout << BLUE << maxi[i] << ", " << NC;
-				// std::cout << std::endl;
-				// end print
-				
 				return maxi;
 			}
 			if (mini.empty() == true)
@@ -199,28 +162,6 @@ class PmergeMe
 				setupSections(split, mini);
 			for (std::size_t i = 0 ; i < mini.size() ; i++)
 				maxi.insert(maxi.begin() += binarySearch(maxi, mini[i]), mini[i]);
-			//
-			// print min
-			// std::cout << std::endl << RED << mini.size() << " END" << std::endl;
-			// std::cout << std::endl;
-			// for (std::size_t i = 0; i < mini.size(); i++)
-			// 	std::cout << BLUE << mini[i] << ", " << NC;
-			// std::cout << std::endl;
-			// end print
-
-
-			// print max
-			// std::cout << std::endl << RED << maxi.size() << " END" << std::endl;
-			// std::cout << std::endl;
-			// for (std::size_t i = 0; i < maxi.size(); i++)
-			// 	std::cout << BLUE << maxi[i] << ", " << NC;
-			// std::cout << std::endl;
-			// end print
-
-			// Need to merge
-
-			// Coupe min en groupe (avec la suite de jacobsthal) et les inverse (les nombres de chaque groupe)
-			// insert chaque nombre en utilisant binary search
 			return maxi;
 		}
 
@@ -239,8 +180,6 @@ class PmergeMe
 					PRINTRB c[i] N ", " N NC;
 			}
 		}
-
-		PmergeMe &operator=(PmergeMe const &obj);
 };
 
 #endif
