@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:50:04 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/16 15:06:30 by rgobet           ###   ########.fr       */
+/*   Updated: 2025/01/13 20:26:19 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,6 @@ void BitcoinExchange::execute()
 		std::istringstream iss(line);
 		std::getline(iss, date, '|');
 		std::getline(iss, value, '\n');
-		// std::cout << date << " " << value << std::endl;
 		if (date.empty() || value.empty())
 		{
 			EmptyErrorMessage(tmp);

@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:36 by rgobet            #+#    #+#             */
-/*   Updated: 2025/01/12 17:07:07 by rgobet           ###   ########.fr       */
+/*   Updated: 2025/01/13 20:26:42 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,13 +71,13 @@ void PmergeMe::execute()
 		throw std::string("Clock error!");
 	this->sortPerPair(pairVector, maxVector);
 	duration = 1000000.0 * (std::clock() - start) / CLOCKS_PER_SEC;
-	PRINTG "Time to process a range of " N v.size() N " elements with std::vector : " N std::fixed N std::setprecision(5) N duration N " us" END
+	PRINTG "Time to process a range of " N v.size() N " elements with std::vector : " N duration N " us" END
 	start = std::clock();
 	if (start == -1)
 		throw std::string("Clock error!");
 	this->sortPerPair(pairDeque, maxDeque);
 	duration = 1000000.0 * (std::clock() - start) / CLOCKS_PER_SEC;
-	PRINTG "Time to process a range of " N d.size() N " elements with std::deque : " N std::fixed N std::setprecision(5) N duration N " us" END
+	PRINTG "Time to process a range of " N d.size() N " elements with std::deque : " N duration N " us" END
 
 	for (std::size_t i = 0; i < v.size(); i++)
 	{
