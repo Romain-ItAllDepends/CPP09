@@ -98,7 +98,6 @@ void BitcoinExchange::execute()
 		std::istringstream iss(line);
 		std::getline(iss, date, '|');
 		std::getline(iss, value, '\n');
-		// std::cout << date << " " << value << std::endl;
 		if (date.empty() || value.empty())
 		{
 			EmptyErrorMessage(tmp);
