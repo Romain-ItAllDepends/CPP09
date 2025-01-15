@@ -55,7 +55,7 @@ void RPN::execute(char **av)
 				else if (av[i][j] == '*')
 					value *= stack.top();
 				else if (av[i][j] == '/')
-					value /= stack.top();
+					value = stack.top() / value;
 				stack.pop();
 				stack.push(value);
 			}

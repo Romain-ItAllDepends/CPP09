@@ -71,13 +71,13 @@ void PmergeMe::execute()
 		throw std::string("Clock error!");
 	this->sortPerPair(pairVector, maxVector);
 	duration = 1000000.0 * (std::clock() - start) / CLOCKS_PER_SEC;
-	PRINTG "Time to process a range of " N v.size() N " elements with std::vector : " N std::fixed N std::setprecision(5) N duration N " us" END
+	PRINTG "Time to process a range of " N v.size() N " elements with std::vector : " N duration N " us" END
 	start = std::clock();
 	if (start == -1)
 		throw std::string("Clock error!");
 	this->sortPerPair(pairDeque, maxDeque);
 	duration = 1000000.0 * (std::clock() - start) / CLOCKS_PER_SEC;
-	PRINTG "Time to process a range of " N d.size() N " elements with std::deque : " N std::fixed N std::setprecision(5) N duration N " us" END
+	PRINTG "Time to process a range of " N d.size() N " elements with std::deque : " N duration N " us" END
 
 	for (std::size_t i = 0; i < v.size(); i++)
 	{
