@@ -109,7 +109,7 @@ void BitcoinExchange::execute()
 		std::map<std::string, float>::const_iterator itRate = _bitcoinRate.find(date);
 		if (itRate == _bitcoinRate.end())
 		{
-			itRate = _bitcoinRate.lower_bound(date);
+			itRate = _bitcoinRate.upper_bound(date);
 			itRate--;
 		}
 		std::cout << GREEN << date << "=> " << value << " = " << strtof(value.c_str(), NULL) * itRate->second;
