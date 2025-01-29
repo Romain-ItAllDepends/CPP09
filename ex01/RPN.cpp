@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:05 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/23 12:28:22 by rgobet           ###   ########.fr       */
+/*   Updated: 2025/01/29 15:53:46 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,8 +38,6 @@ void RPN::execute(char **av)
 		j = 0;
 		while (av[i][j])
 		{
-			if (av[i][j] == ' ')
-				j++;
 			if (av[i][j] == '+' || av[i][j] == '-' || av[i][j] == '*' || av[i][j] == '/')
 			{
 				value = stack.top();
