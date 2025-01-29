@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:51:19 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/21 08:59:31 by rgobet           ###   ########.fr       */
+/*   Updated: 2025/01/29 15:46:21 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,11 @@ static bool FileParser(std::string const &file)
 		std::getline(iss, value, '\n');
 		if (date.empty() || value.empty())
 			return EmptyErrorMessage(ifs);
+		if (date.length() != 10 && i == 0)
+		{
+			std::cerr << RED << "Error: On header: " << line << NC << std::endl;
+			return false;
+		}
 		if (DateParser(date, ',', ifs) == false || ValueParser(value, ',', ifs) == false)
 			return false;
 		i++;

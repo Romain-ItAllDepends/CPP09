@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:50:04 by rgobet            #+#    #+#             */
-/*   Updated: 2025/01/23 11:47:28 by rgobet           ###   ########.fr       */
+/*   Updated: 2025/01/29 15:45:57 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,11 @@ void BitcoinExchange::execute()
 		if (date.empty() || value.empty())
 		{
 			EmptyErrorMessage(tmp);
+			continue ;
+		}
+		if (date.length() != 11 && i == 0)
+		{
+			std::cerr << RED << "Error: On header: " << line << NC << std::endl;
 			continue ;
 		}
 		if (DateParser(date, '|', tmp) == false || ValueParser(value, '|', tmp) == false)
