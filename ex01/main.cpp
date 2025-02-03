@@ -6,7 +6,7 @@
 /*   By: rgobet <rgobet@student.42angouleme.fr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 14:49:05 by rgobet            #+#    #+#             */
-/*   Updated: 2024/12/23 11:10:35 by rgobet           ###   ########.fr       */
+/*   Updated: 2025/02/03 10:58:42 by rgobet           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ static void ParseInput(int ac, char **str)
 {
 	std::string input;
 	int j = 1;
+	int x;
 
 	if (ac != 2)
 		throw std::string("Wrong number of arguments!");
@@ -23,11 +24,17 @@ static void ParseInput(int ac, char **str)
 		throw std::string("Wrong input!");
 	while (str && str[j])
 	{
+		x = 0;
 		input = str[j];
-		for (int i = 0; i < 255; i++)
+		while (str[j][x])
 		{
-			if (i != 32 && i != 43 && i != 42 && (i < 47 || i > 57) && !input.find(static_cast<char>(i)))
+			if (str[j][x] != 32 && str[j][x] != 43 && str[j][x] != 42
+				&& str[j][x] != 45 && (str[j][x] < 47 || str[j][x] > 57))
 				throw std::string("Invalid argument: ") + input;
+			if ((str[j][x] == 43 || str[j][x] == 42 || str[j][x] == 47 || str[j][x] == 45)
+				&& (str[j][x + 1] && str[j][x + 1] != ' ' && str[j][x + 1] != '\0'))
+				throw std::string("Wrong format!");
+			x++;
 		}
 		j++;
 	}
